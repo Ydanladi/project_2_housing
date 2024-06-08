@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-
+import matplotlib.pyplot as plt
 
 headers={
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
@@ -52,5 +52,24 @@ for page in pages:
 
 df=pd.DataFrame(columns=['apartment_type','price','location','link_to_property','contacts'])
 df=pd.DataFrame(container)
-#print(df.head())
+print(df.head())
 df.to_csv('extract.csv')
+
+#trying to get some insight on the data
+
+df=pd.read_csv('extract.csv')
+
+
+df['price']=df['price'].str.replace('₦','')
+df['price']=df['price'].str.replace(',','')
+df=df.sort_values('price')
+
+
+
+
+plt.scatter(x=df['location'],y=df['price'])
+plt.xlabel('Location of Apartment')
+plt.ylabel('Price of Apartment')
+print(plt.show())
+#print(df.head())
+
