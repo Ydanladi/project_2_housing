@@ -57,7 +57,7 @@ df.to_csv('extract.csv')
 
 #trying to get some insight on the data
 
-df=pd.read_csv('extract.csv')
+df=pd.read_csv('extract2.csv')
 
 
 df['price']=df['price'].str.replace('₦','')
